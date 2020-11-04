@@ -1,0 +1,24 @@
+:root {
+    --main-color: #CEEDEF
+}
+
+.border-transparent {
+    border: 2px solid transparent;
+}
+
+.btn-hover:hover {
+    background-color: #f2f5f7 !important;
+    border-bottom: 2px solid var(--main-color) !important;
+}
+
+.showcase {
+    background-color: #f3f3f3;
+}
+
+.slogan > h1 {
+    font-size: 4rem;
+}
+
+.slogan > p {
+    font-size: 1.4rem;
+}
