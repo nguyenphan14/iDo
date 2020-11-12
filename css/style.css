@@ -22,3 +22,21 @@
 .slogan > p {
     font-size: 1.4rem;
 }
+
+.toggle-btn {
+    font-size: 1.5rem;
+    align-items: center;
+}
+
+.toggle-btn:focus {
+    outline: none;
+}
+
+.toggle-btn:hover {
+    color: var(--main-color);
+}
+
+.error-message {
+    color: red;
+    
+}

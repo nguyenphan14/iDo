@@ -1,0 +1,51 @@
+:root {
+    --main-color: #CEEDEF
+}
+
+.register-container {
+    width: 100%;
+    height: 100vh;
+    background: url(../imgs/login-bg.jpg) no-repeat center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#register-form {
+    width: 30%;
+    background-color: #ffffff;
+    border: 2px solid #f8f9fa;
+    border-radius: 4px;
+    padding: 2rem;
+}
+
+.log-btn {
+    color: #898989;
+    cursor: pointer;
+
+}
+
+.log-btn:hover {
+    color: #333333;
+}
+
+#register-btn {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    font-size: 1.2rem;
+    transition: 0.1s ease-out;
+    padding: 1rem 2rem;
+    border-bottom: 2px solid transparent;
+}
+
+#register-btn:hover {
+    color:  #000;
+    font-weight: bold;
+    border-bottom: 2px solid var(--main-color)
+}
+
+#register-btn:focus {
+    outline: none;
+}
