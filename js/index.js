@@ -1,6 +1,6 @@
 window.onload = () => {
     console.log('Window loaded')
-    view.setActiveScreen('loginPage');
+    view.setActiveScreen('welcomePage');
     // Your web app's Firebase configuration
     var firebaseConfig = {
         apiKey: "AIzaSyARt5k7oXXEO3iQyCtgkkhdlO86RGv3N40",
@@ -18,6 +18,7 @@ window.onload = () => {
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
         // User is signed in.
+            console.log('Signed');
         } else {
         // No user is signed in.
         }

@@ -1,0 +1,20 @@
+.icon {
+    color: #ffffff;
+}
+
+.dropdown-toggle::after {
+    display: none;
+}
+
+.icon:hover {
+    color: #CEEDEF;
+}
+
+.nav-input {
+    background-color: #a6f6f1;
+}
+
+.nav-input:hover {
+    background-color: #ffffff;
+}
+
