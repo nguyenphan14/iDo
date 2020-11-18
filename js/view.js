@@ -50,7 +50,22 @@ view.setActiveScreen = (screen) => {
                 controller.register(dataRegister);
             })
             break;
-
+        case 'homePage':
+            document.getElementById('iDo-app').innerHTML = components.homePage;
+            const quickAddTaskForm = document.getElementById('quickAddTaskForm');
+            console.log(quickAddTaskForm);
+            quickAddTaskForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const taskData = {
+                    creator: model.currentUser.email,
+                    content: quickAddTaskForm.quickTaskContent.value,
+                    dueDate: quickAddTaskForm.taskDueDate.value,
+                    priority: quickAddTaskForm.taskPriority.value,
+                    state: quickAddTaskForm.taskState.value,
+                    subTasks: []
+                }
+                controller.quickAddTask(taskData);
+            })
     }
 }
 

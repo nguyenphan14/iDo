@@ -1,6 +1,5 @@
 window.onload = () => {
-    console.log('Window loaded')
-    view.setActiveScreen('welcomePage');
+    console.log('Window loaded');
     // Your web app's Firebase configuration
     var firebaseConfig = {
         apiKey: "AIzaSyARt5k7oXXEO3iQyCtgkkhdlO86RGv3N40",
@@ -18,9 +17,20 @@ window.onload = () => {
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
         // User is signed in.
-            console.log('Signed');
+            console.log(user); 
+            if(user.emailVerified) {
+                model.currentUser = {
+                    displayName: user.displayName,
+                    email: user.email
+                }
+                view.setActiveScreen('homePage');
+            } else {
+                alert('Please verify your email');
+                view.setActiveScreen('loginPage');
+            }
         } else {
         // No user is signed in.
+            view.setActiveScreen('registerPage');
         }
     });
 }

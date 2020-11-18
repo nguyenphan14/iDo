@@ -70,3 +70,20 @@ controller.login = ({email, password}) => {
         model.login(dataLogin);
     }
 }
+
+controller.quickAddTask = ({creator, content, dueDate, priority, state, subTasks}) => {
+    if(content === '') {
+        view.setErrorMessage('quickTaskHelp', 'Enter task content');
+    } else {
+        view.setErrorMessage('quickTaskHelp', '');
+        const taskData = {
+            creator: creator,
+            content: content,
+            dueDate: dueDate,
+            priority: priority,
+            state: state,
+            subTasks: subTasks
+        }
+        model.quickAddTask(taskData);
+    }
+}

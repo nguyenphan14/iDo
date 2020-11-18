@@ -1,5 +1,7 @@
 const model = {};
 
+model.currentUser = {};
+
 model.register = async ({firstName, lastName, email, password, confirmPassword}) => {
     try {
         await firebase.auth().createUserWithEmailAndPassword(email, password);
@@ -31,10 +33,25 @@ model.login = async ({email, password}) => {
             alert('Verify your email');
             user.sendEmailVerification();
         } else {
+            console.log('Verified');
             view.setActiveScreen('homePage');
         }
     } catch(err) {
         console.log(err);
         alert(err.message);
     }
+}
+
+model.quickAddTask = ({creator, content, dueDate, priority, state, subTasks}) => {
+    const dataToAdd = {
+        creator: creator,
+        content: content,
+        dueDate: dueDate,
+        priority: priority,
+        state: state,
+        subTasks: subTasks
+    }
+    firebase.firestore().collection('tasks').add(dataToAdd).catch(function(error) {
+        console.error("Error adding document: ", error);
+    });
 }
