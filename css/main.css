@@ -106,11 +106,11 @@
     font-size: 0.6rem;
 }
 
-.task-list {
+#task {
     padding: 1rem 4rem;
 }
 
-.task-list ul {
+#task ul {
     list-style: none;
     padding: 15px;
 }
@@ -125,7 +125,6 @@
 
 .task-edit i {
     font-size: 1.2rem;
-    cursor: pointer;
 }
 
 .task-edit i:hover {
@@ -153,4 +152,8 @@
 
 #task-title {
     overflow-wrap: break-word;
+}
+
+#task-list li {
+    cursor: pointer;
 }

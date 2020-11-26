@@ -71,7 +71,7 @@ controller.login = ({email, password}) => {
     }
 }
 
-controller.quickAddTask = ({creator, content, dueDate, priority, state, subTasks}) => {
+controller.quickAddTask = ({updater, content, dueDate, priority, state, subTasks}) => {
     if(content === '') {
         view.setErrorMessage('quickTaskHelp', 'Enter task content');
     } else {
@@ -85,5 +85,22 @@ controller.quickAddTask = ({creator, content, dueDate, priority, state, subTasks
             subTasks: subTasks
         }
         model.quickAddTask(taskData);
+    }
+}
+
+controller.updateTask = ({updater, content, dueDate, priority, state, subTasks}) => {
+    if(content === '') {
+        view.setErrorMessage('updateTaskHelp', 'Enter task content');
+    } else {
+        view.setErrorMessage('updateTaskHelp', '');
+        const taskData = {
+            updater: updater,
+            content: content,
+            dueDate: dueDate,
+            priority: priority,
+            state: state,
+            subTasks: subTasks
+        }
+        model.updateTask(taskData);
     }
 }

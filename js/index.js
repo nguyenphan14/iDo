@@ -17,7 +17,6 @@ window.onload = () => {
     firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
         // User is signed in.
-            console.log(user); 
             if(user.emailVerified) {
                 model.currentUser = {
                     displayName: user.displayName,
@@ -35,5 +34,12 @@ window.onload = () => {
     });
 }
 
+const getDataFormDoc = (respone) => {
+    const data = respone.data();
+    data.id = respone.id;
+    return data;
+}
 
-
+const getDataFormDocs = (respone) => {
+    return respone.docs.map((doc) => getDataFormDoc(doc));
+}

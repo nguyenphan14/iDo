@@ -53,7 +53,6 @@ view.setActiveScreen = (screen) => {
         case 'homePage':
             document.getElementById('iDo-app').innerHTML = components.homePage;
             const quickAddTaskForm = document.getElementById('quickAddTaskForm');
-            console.log(quickAddTaskForm);
             quickAddTaskForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 const taskData = {
@@ -65,10 +64,59 @@ view.setActiveScreen = (screen) => {
                     subTasks: []
                 }
                 controller.quickAddTask(taskData);
+            });
+            model.getAllTasks();
+            model.listenTaskChange();
+            const updateTaskForm = document.getElementById('updateTaskForm');
+            updateTaskForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const taskData = {
+                    updater: model.currentUser.email,
+                    content: updateTaskForm.quickTaskContent.value,
+                    dueDate: updateTaskForm.taskDueDate.value,
+                    priority: updateTaskForm.taskPriority.value,
+                    state: updateTaskForm.taskState.value,
+                    subTasks: []
+                }
+                controller.updateTask(taskData);
             })
     }
 }
 
 view.setErrorMessage = (id, message) => {
     document.getElementById(id).innerText = message;
+}
+
+view.addTask = (task) => {
+    let li = document.createElement('li');
+    li.id = task.id;
+    li.className = 'row task-item mt-2';
+    li.innerHTML = `
+    <div class="mt-1">
+        <button class="task-check-box task-priority-${task.priority}"></button>
+    </div>
+    <div class="task-content pl-2 col">
+        <div class="task-content-text">
+            ${task.content}
+        </div>
+        <span class="task-flag task-flag-${task.priority}">
+            <i class="far fa-flag" aria-hidden="true"></i>
+        </span>
+        <span class="task-content-schedule text-muted">
+            ${new Date(task.dueDate).toDateString()}
+        </span>
+    </div>
+    <div class="float-right task-edit mt-1">
+        <i class="far fa-edit" aria-hidden="true"></i>
+    </div>
+    `
+    document.getElementById('task-list').appendChild(li);
+    document.querySelector(`#${task.id} .task-edit`).addEventListener('click', (event) => {
+        $('#updateTaskModal').modal('show');
+        model.updateTaskId.push(task.id);
+    })
+}
+
+view.showAllTasks = () => {
+    model.tasks.forEach((task) => view.addTask(task));
 }
