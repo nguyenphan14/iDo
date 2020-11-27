@@ -23,6 +23,9 @@ window.onload = () => {
                     email: user.email
                 }
                 view.setActiveScreen('homePage');
+                document.getElementById('logOut').addEventListener('click', () => {
+                    firebase.auth().signOut();
+                })
             } else {
                 alert('Please verify your email');
                 view.setActiveScreen('loginPage');
@@ -33,6 +36,8 @@ window.onload = () => {
         }
     });
 }
+
+
 
 const getDataFormDoc = (respone) => {
     const data = respone.data();
