@@ -104,7 +104,8 @@ view.setActiveScreen = (screen) => {
             });
             const todayTasks = model.tasks.filter((task) => task.dueDate === new Date().toDateString());
             document.getElementById('task-list').innerHTML = "";
-            todayTasks.forEach((task) => view.addTask(task))
+            todayTasks.forEach((task) => view.addTask(task));
+            
             break;
         case 'upcomingFilter':
             document.getElementById('filter-section').innerHTML = `
@@ -119,6 +120,10 @@ view.setActiveScreen = (screen) => {
             document.getElementById('filter-inbox').addEventListener('click', () => {
                 view.setActiveScreen('homePage');
             })
+
+            const upcomingTasks = model.tasks.filter((task) => new Date(task.dueDate).getTime() > new Date().getTime())
+            document.getElementById('task-list').innerHTML = "";
+            upcomingTasks.forEach((task) => view.addTask(task));
             break;
 
     }
