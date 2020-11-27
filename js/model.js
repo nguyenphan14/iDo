@@ -71,9 +71,9 @@ model.getAllTasks = async () => {
     }
 }
 
-model.listenTaskChange = () => {
+model.listenTaskChange = async () => {
     let isFirst = true;
-    firebase.firestore().collection('tasks').onSnapshot((snapshot) => {
+    await firebase.firestore().collection('tasks').onSnapshot((snapshot) => {
         if(isFirst) {
             isFirst = false;
             return;

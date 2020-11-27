@@ -157,11 +157,11 @@ view.addTask = (task) => {
     </div>
     `
     document.getElementById('task-list').appendChild(li);
-    document.querySelector(`#${task.id} .task-edit`).addEventListener('click', (event) => {
+    document.getElementById(task.id).querySelector(' .task-edit').addEventListener('click', (event) => {
         $('#updateTaskModal').modal('show');
         model.updateTaskId.push(task.id);
     });
-    document.querySelector(`#${task.id} .task-check-box`).addEventListener('click', (event) => {
+    document.getElementById(task.id).querySelector('.task-check-box').addEventListener('click', (event) => {
         document.getElementById('taskCompleter').innerHTML = model.currentUser.displayName;
         $('.toast').toast('show');
         document.getElementById(task.id).style.display = 'none';
