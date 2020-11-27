@@ -64,7 +64,7 @@ model.quickAddTask = async ({creator, content, dueDate, priority, state, subTask
 }
 
 model.getAllTasks = async () => {
-    const respone = await firebase.firestore().collection('tasks').get();
+    const respone = await firebase.firestore().collection('tasks').where("creator", "==" , model.currentUser.email).get()
     model.tasks = getDataFormDocs(respone);
     if(model.tasks.length > 0) {
         view.showAllTasks();
@@ -79,28 +79,39 @@ model.listenTaskChange = () => {
             return;
         }
         snapshot.docChanges().forEach((change) => {
-            console.log(change)
             if(change.type === "added") {
                 model.tasks.push(change.doc.data());
                 view.addTask(change.doc.data());
             } else if(change.type === "modified") {
-                
+                for(let i = 0; i < model.tasks.length; i++) {
+                    if(model.tasks[i].id === change.doc.id) {
+                        model.tasks[i] = change.doc.data();
+                        break;
+                    }
+                }
+                view.showAllTasks();
             }
         })
     })
 }
 
-model.updateTask = ({updater, content, dueDate, priority, state, subTasks}) => {
+model.updateTask = async ({updater, content, dueDate, priority, state, subTasks}) => {
     const docId = model.updateTaskId[model.updateTaskId.length-1];
     const dataUpdate = {
-        updater: updater,
+        updater: firebase.firestore.FieldValue.arrayUnion(updater),
         content: content,
         dueDate: dueDate,
         priority: priority,
         state: state,
         subTasks: firebase.firestore.FieldValue.arrayUnion(...subTasks)
     }
-    firebase.firestore().collection('tasks').doc(docId).update(dataUpdate)
+    await firebase.firestore().collection('tasks').doc(docId).update(dataUpdate)
     .catch((err) => console.log(err));
 
+}
+
+model.completeTask = async (taskId) => {
+    await firebase.firestore().collection('tasks').doc(taskId).update({
+        state: "Done"
+    })
 }

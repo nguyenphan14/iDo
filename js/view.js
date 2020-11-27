@@ -79,7 +79,45 @@ view.setActiveScreen = (screen) => {
                     subTasks: []
                 }
                 controller.updateTask(taskData);
+                $('#updateTaskModal').modal('hide');
+            });
+            document.getElementById('filter-today').addEventListener('click', () => {
+                view.setActiveScreen('todayFilter');
             })
+            document.getElementById('filter-upcoming').addEventListener('click', () => {
+                view.setActiveScreen('upcomingFilter');
+            })
+
+            break;
+        case 'todayFilter':
+            document.getElementById('filter-section').innerHTML = `
+                    <div class="filter-name">
+                        <h3>Today</h3>
+                    </div>
+                    <ul id="task-list"></ul>
+            `
+            document.getElementById('filter-upcoming').addEventListener('click', () => {
+                view.setActiveScreen('upcomingFilter');
+            })
+            document.getElementById('filter-inbox').addEventListener('click', () => {
+                view.setActiveScreen('homePage');
+            })
+            break;
+        case 'upcomingFilter':
+            document.getElementById('filter-section').innerHTML = `
+                    <div class="filter-name">
+                        <h3>Upcoming</h3>
+                    </div>
+                    <ul id="task-list"></ul>
+            `
+            document.getElementById('filter-today').addEventListener('click', () => {
+                view.setActiveScreen('todayFilter');
+            })
+            document.getElementById('filter-inbox').addEventListener('click', () => {
+                view.setActiveScreen('homePage');
+            })
+            break;
+
     }
 }
 
@@ -93,7 +131,7 @@ view.addTask = (task) => {
     li.className = 'row task-item mt-2';
     li.innerHTML = `
     <div class="mt-1">
-        <button class="task-check-box task-priority-${task.priority}"></button>
+        <button type="button" class="task-check-box task-priority-${task.priority}" data-toggle="tooltip" data-placement="bottom" title="Done!"></button>
     </div>
     <div class="task-content pl-2 col">
         <div class="task-content-text">
@@ -114,9 +152,16 @@ view.addTask = (task) => {
     document.querySelector(`#${task.id} .task-edit`).addEventListener('click', (event) => {
         $('#updateTaskModal').modal('show');
         model.updateTaskId.push(task.id);
+    });
+    document.querySelector(`#${task.id} .task-check-box`).addEventListener('click', (event) => {
+        document.getElementById('taskCompleter').innerHTML = model.currentUser.displayName;
+        $('.toast').toast('show');
+        document.getElementById(task.id).style.display = 'none';
+        model.completeTask(task.id);    
     })
 }
 
 view.showAllTasks = () => {
+    document.getElementById('task-list').innerHTML = "";
     model.tasks.forEach((task) => view.addTask(task));
 }

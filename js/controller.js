@@ -71,7 +71,7 @@ controller.login = ({email, password}) => {
     }
 }
 
-controller.quickAddTask = ({updater, content, dueDate, priority, state, subTasks}) => {
+controller.quickAddTask = ({creator, content, dueDate, priority, state, subTasks}) => {
     if(content === '') {
         view.setErrorMessage('quickTaskHelp', 'Enter task content');
     } else {

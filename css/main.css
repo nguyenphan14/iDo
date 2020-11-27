@@ -63,7 +63,7 @@
     border: 1px solid #808080 ;
     border-radius: 50%;
     background-color: #ffffff;
-    transition: 0.1s ease-in-out;
+    /* transition: 0.1s ease-in-out; */
 }
 
 .task-check-box:hover {
@@ -97,7 +97,7 @@
     color: #37DFCA;
 }
 
-.task-check-box:focus {
+.task-check-box:hover, .task-check-box:focus  {
     outline: none;
     transform: scale(1.2, 1.2);
 }

@@ -205,67 +205,67 @@ components.homePage = `
         </nav>
         <div class="row">
             <div class="left-side col-3">
-            <div class="modal fade " id="updateTaskModal" tabindex="-1" aria-labelledby="updateTask" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="updateTask">Update task</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form id="updateTaskForm">
-                                <div class="form-group">
-                                    <label for="quick-task-content" class="col-form-label">Task:</label>
-                                    <textarea class="form-control" id="quick-task-content" name="quickTaskContent" rows="3" aria-describedby="quickTaskHelp"></textarea>
-                                    <small id="updateTaskHelp" class="form-text text-danger"></small>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group row col-8">
-                                        <label for="task-due-date" class="col-2 col-form-label">Date:</label>
-                                        <div class="col-10">
-                                            <input class="form-control" type="date" value="2020-01-01" id="task-due-date" name="taskDueDate">
-                                        </div>
+                <div class="modal fade " id="updateTaskModal" tabindex="-1" aria-labelledby="updateTask" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="updateTask">Update task</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="updateTaskForm">
+                                    <div class="form-group">
+                                        <label for="quick-task-content" class="col-form-label">Task:</label>
+                                        <textarea class="form-control" id="quick-task-content" name="quickTaskContent" rows="3" aria-describedby="quickTaskHelp"></textarea>
+                                        <small id="updateTaskHelp" class="form-text text-danger"></small>
                                     </div>
-                                    <div class="col-4" style="padding: 0">
-                                        <div class="form-group row">
-                                            <label for="task-priority" class="col-4 text-center mt-2">Priority: </label>
-                                            <div class="col-8">
-                                                <select class="form-control" id="task-priority" name="taskPriority">
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                  </select>
+                                    <div class="row">
+                                        <div class="form-group row col-8">
+                                            <label for="task-due-date" class="col-2 col-form-label">Date:</label>
+                                            <div class="col-10">
+                                                <input class="form-control" type="date" value="2020-01-01" id="task-due-date" name="taskDueDate">
+                                            </div>
+                                        </div>
+                                        <div class="col-4" style="padding: 0">
+                                            <div class="form-group row">
+                                                <label for="task-priority" class="col-4 text-center mt-2">Priority: </label>
+                                                <div class="col-8">
+                                                    <select class="form-control" id="task-priority" name="taskPriority">
+                                                        <option>1</option>
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                      </select>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="task-state" class="col-1 mr-2 mt-2">State: </label>
-                                    <div class="col-8">
-                                        <select class="form-control" id="task-state" name="taskState">
-                                            <option>To do</option>
-                                            <option>Doing</option>
-                                            <option>Done</option>
-                                          </select>
+                                    <div class="form-group row">
+                                        <label for="task-state" class="col-1 mr-2 mt-2">State: </label>
+                                        <div class="col-8">
+                                            <select class="form-control" id="task-state" name="taskState">
+                                                <option>To do</option>
+                                                <option>Doing</option>
+                                                <option>Done</option>
+                                              </select>
+                                        </div>
                                     </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="submit" class="btn btn-add" form="updateTaskForm">Update task</button>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="submit" class="btn btn-add" form="updateTaskForm">Update task</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
                 <div class="list-holder">
                     <div class="filter-main mt-3">
                         <ul class="list-filter">
-                            <li><i class="fas fa-layer-group p-2" style="color: #246fe0;"></i>Inbox</li>
-                            <li><i class="fas fa-calendar-day p-2" style="color: #058527;"></i>Today</li>
-                            <li><i class="far fa-calendar-alt p-2" style="color: #692fc2;"></i>Upcoming</li>
+                            <li id="filter-inbox"><i class="fas fa-layer-group p-2" style="color: #246fe0;"></i>Inbox</li>
+                            <li id="filter-today"><i class="fas fa-calendar-day p-2" style="color: #058527;"></i>Today</li>
+                            <li id="filter-upcoming"><i class="far fa-calendar-alt p-2" style="color: #692fc2;"></i>Upcoming</li>
                         </ul>
                     </div>
                     <div class="filter-expand">
@@ -281,12 +281,27 @@ components.homePage = `
                 </div>
             </div>
             <div class="col-9" id="task">
-                <div class="container mt-5 px-5">
-                    <div class="filter">
+                <div data-delay="1000" aria-live="polite" aria-atomic="true" style="position: relative; min-height: 2rem;">
+                    <div style="position: absolute; top: 0; right: 0;">
+                        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                            <div class="toast-header">
+                                <strong class="mr-auto" id="taskCompleter"></strong>
+                                <small class="text-muted ml-1">just now</small>
+                                <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="toast-body">
+                                Complete task!!!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container mt-5 px-5" id="filter-section">
+                    <div class="filter-name">
                         <h3>Inbox</h3>
                     </div>
-                    <ul id="task-list">
-                    </ul>
+                    <ul id="task-list"></ul>
                 </div>
             </div>
         </div>
