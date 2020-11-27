@@ -58,7 +58,7 @@ view.setActiveScreen = (screen) => {
                 const taskData = {
                     creator: model.currentUser.email,
                     content: quickAddTaskForm.quickTaskContent.value,
-                    dueDate: quickAddTaskForm.taskDueDate.value,
+                    dueDate: new Date(quickAddTaskForm.taskDueDate.value).toDateString(),
                     priority: quickAddTaskForm.taskPriority.value,
                     state: quickAddTaskForm.taskState.value,
                     subTasks: []
@@ -73,7 +73,7 @@ view.setActiveScreen = (screen) => {
                 const taskData = {
                     updater: model.currentUser.email,
                     content: updateTaskForm.quickTaskContent.value,
-                    dueDate: updateTaskForm.taskDueDate.value,
+                    dueDate: new Date(quickAddTaskForm.taskDueDate.value).toDateString(),
                     priority: updateTaskForm.taskPriority.value,
                     state: updateTaskForm.taskState.value,
                     subTasks: []
@@ -101,7 +101,10 @@ view.setActiveScreen = (screen) => {
             })
             document.getElementById('filter-inbox').addEventListener('click', () => {
                 view.setActiveScreen('homePage');
-            })
+            });
+            const todayTasks = model.tasks.filter((task) => task.dueDate === new Date().toDateString());
+            document.getElementById('task-list').innerHTML = "";
+            todayTasks.forEach((task) => view.addTask(task))
             break;
         case 'upcomingFilter':
             document.getElementById('filter-section').innerHTML = `
