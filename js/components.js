@@ -198,7 +198,7 @@ components.homePage = `
                     <div class="dropdown-menu dropdown-menu-right mt-3" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" href="#">Settings</a>
                     <a class="dropdown-item" href="#">About us</a>
-                    <a class="dropdown-item" href="#">Log out</a>
+                    <a class="dropdown-item" id="logOut" href="#">Log out</a>
                     </div>
                 </div>
             </div>
